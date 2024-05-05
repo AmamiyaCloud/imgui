@@ -17,6 +17,9 @@
 #include <dxgi1_4.h>
 #include <tchar.h>
 
+#include "imgui_abyss_theme.h"
+#include "imgui_abyss_extend.h"
+
 #ifdef _DEBUG
 #define DX12_ENABLE_DEBUG_LAYER
 #endif
@@ -93,16 +96,18 @@ int main(int, char**)
     //io.ConfigViewportsNoTaskBarIcon = true;
 
     // Setup Dear ImGui style
-    ImGui::StyleColorsDark();
-    //ImGui::StyleColorsLight();
+    // ImGui::StyleColorsDark();
+    // ImGui::StyleColorsLight();
+    Abyss::LoadFont();
+    Abyss::SetAbyssImGuiStyles(ImGui::GetStyle());
 
     // When viewports are enabled we tweak WindowRounding/WindowBg so platform windows can look identical to regular ones.
-    ImGuiStyle& style = ImGui::GetStyle();
-    if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
-    {
-        style.WindowRounding = 0.0f;
-        style.Colors[ImGuiCol_WindowBg].w = 1.0f;
-    }
+    // ImGuiStyle& style = ImGui::GetStyle();
+    // if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+    // {
+    //     style.WindowRounding = 0.0f;
+    //     style.Colors[ImGuiCol_WindowBg].w = 1.0f;
+    // }
 
     // Setup Platform/Renderer backends
     ImGui_ImplWin32_Init(hwnd);
@@ -131,6 +136,7 @@ int main(int, char**)
     bool show_demo_window = true;
     bool show_another_window = false;
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+    float v[3] = {0};
 
     // Main loop
     bool done = false;
@@ -168,6 +174,7 @@ int main(int, char**)
             ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
             ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
             ImGui::Checkbox("Another Window", &show_another_window);
+            ImGui::DragVector3("Position", v);
 
             ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
             ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
