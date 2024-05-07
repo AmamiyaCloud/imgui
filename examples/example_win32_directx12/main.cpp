@@ -136,7 +136,10 @@ int main(int, char**)
     bool show_demo_window = true;
     bool show_another_window = false;
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
-    float v[3] = {0};
+    float v = 0;
+    float v2[2] = {0};
+    float v3[3] = {0};
+    float v4[4] = {0};
 
     // Main loop
     bool done = false;
@@ -174,7 +177,10 @@ int main(int, char**)
             ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
             ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
             ImGui::Checkbox("Another Window", &show_another_window);
-            ImGui::DragVector3("Position", v);
+            ImGui::AbyssDragVector4("Position", v4);
+            ImGui::AbyssDragVector3("Position", v3);
+            ImGui::AbyssDragVector2("Position", v2);
+            ImGui::AbyssDragFloat("Position", v);
 
             ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
             ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
